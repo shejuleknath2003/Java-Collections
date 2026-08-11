@@ -1,0 +1,471 @@
+HashMap:
+=============
+It is an implementation class of Map and it will work based on a hashing mechanism.
+
+HashMap uses an array of buckets where each bucket stores a linked list of nodes.
+Initial Capacity: Default size of the array (16 buckets).
+Load Factor: 0.75 (75%) → When the map reaches 75% capacity, it resizes (doubles the size).
+
+Constructors:
+=======
+HashMap()
+Constructs an empty HashMap with the default initial capacity (16) and the default load factor (0.75).
+HashMap(int initialCapacity)
+HashMap(int initialCapacity, float loadFactor)
+HashMap(Map<? extends K,? extends V> m)
+
+Characteristics:
+========
+-> Stores key-value pairs	Each key is mapped to a value.
+-> No duplicate keys	Keys must be unique, but values can be duplicated.
+-> Allows null keys & values	One null key is allowed, multiple null values are allowed.
+-> Unordered	Does not maintain insertion order.
+-> Fast operations (O(1))	Average time complexity for put(), get(), remove() is O(1).
+-> Not Thread-Safe	Use Collections.synchronizedMap() or ConcurrentHashMap for thread safety.
+
+Note: There is no extra methods in HashMap.
+-->If a key already exists, put(K key, V value) replaces the old value.
+
+Note:
+======
+What if Two Keys are Identical?
+If the keys are equal (equals() returns true), the new value replaces the old value.
+If they have the same hash but are different keys, they are stored separately.
+
+
+EXAMPLE PROGRAMS:
+=======
+package Collection.afternun.Map;
+import java.util.HashMap;
+public class AddingIntegerIntoHashMap 
+{
+	public static void main(String[] args) 
+	{
+		//adding elements into hashmap in key-value pair
+		HashMap<Integer, String> hm=new HashMap<>();
+		hm.put(100, "kiran");//entry
+		hm.put(101, "rajesh");//entry
+		System.out.println(hm);
+		hm.putIfAbsent(100, "praveen");//entry
+		System.out.println(hm.containsKey(110));
+		System.out.println(hm.containsValue("kiran"));
+		System.out.println(hm);
+	}
+}
+o/p:
+----
+{100=kiran, 101=rajesh}
+false
+true
+{100=kiran, 101=rajesh}
+=======================================================================
+package Collection.afternun.Map;
+import java.util.HashMap;
+public class GetMethodInMap
+{
+	public static void main(String[] args) 
+	{
+		HashMap<Integer, String> hm1=new HashMap<>();
+		hm1.put(100, "kiran");//entry//4
+		hm1.put(101, "rajesh");//entry//5
+		hm1.put(121, "arjun");//entry//9
+		hm1.put(111, "sundar");//entry//15
+		hm1.put(151, "hemanth");//entry//7
+		System.out.println(hm1.get(10));
+		HashMap<Integer, String> hm2=new HashMap<>();
+		hm2.put(1, "kiran");//entry
+		hm2.put(12, "rajesh");//entry
+		hm2.put(3, "arjun");//entry
+		hm2.put(4, "sundar");//entry
+		hm2.put(5, "hemanth");//entry
+		hm2.put(100, "kir");//entry
+		System.out.println(hm1);
+		hm1.putAll(hm2);
+		System.out.println(hm1);
+	}
+}
+==============================
+package Collection.afternun.Map;
+import java.util.HashMap;
+public class GetMethodInMap
+{
+	public static void main(String[] args) 
+	{
+		HashMap<Integer, String> hm1=new HashMap<>();
+		hm1.put(100, "kiran");//entry//4
+		hm1.put(101, "rajesh");//entry//5
+		hm1.put(121, "arjun");//entry//9
+		hm1.put(111, "sundar");//entry//15
+		hm1.put(151, "hemanth");//entry//7
+		System.out.println(hm1.get(10));
+		HashMap<Integer, String> hm2=new HashMap<>();
+		hm2.put(1, "kiran");//entry
+		hm2.put(12, "rajesh");//entry
+		hm2.put(3, "arjun");//entry
+		hm2.put(4, "sundar");//entry
+		hm2.put(5, "hemanth");//entry
+		hm2.put(100, "kir");//entry
+		System.out.println(hm1);
+		hm1.putAll(hm2);
+		System.out.println(hm1);
+	}
+}
+o/p:
+-------
+null
+{100=kiran, 101=rajesh, 151=hemanth, 121=arjun, 111=sundar}
+{1=kiran, 3=arjun, 100=kir, 4=sundar, 101=rajesh, 5=hemanth, 151=hemanth, 121=arjun, 12=rajesh, 111=sundar}
+
+========================================
+package Collection.afternun.Map;
+
+import java.util.HashMap;
+import java.util.Set;
+
+public class KeySetOfMap 
+{
+	public static void main(String[] args)
+	{
+		HashMap<Integer, String> hm1=new HashMap<>();
+		hm1.put(100, "kiran");//entry//4
+		hm1.put(101, "rajesh");//entry//5
+		hm1.put(121, "arjun");//entry//9
+		hm1.put(111, "sundar");//entry//15
+		hm1.put(151, "hemanth");//entry//7
+
+		//accessing all the keys
+		Set<Integer> s=hm1.keySet();
+		for(Integer i:s)
+		{
+			System.out.println(i+"->"+hm1.get(i));	
+		}
+
+	}
+
+}
+o/p:
+====
+100->kiran
+101->rajesh
+151->hemanth
+121->arjun
+111->sundar
+==========================
+package Collection.afternun.Map;
+
+import java.util.Collection;
+import java.util.HashMap;
+
+public class ValuesOfHashMap {
+	
+
+	public static void main(String[] args) 
+	{
+		HashMap<Integer, String> hm1=new HashMap<>();
+		hm1.put(100, "kiran");//entry//4
+		hm1.put(101, "rajesh");//entry//5
+		hm1.put(121, "arjun");//entry//9
+		hm1.put(111, "sundar");//entry//15
+		hm1.put(151, "hemanth");//entry//7
+		
+		 Collection<String> c=hm1.values();
+		 System.out.println(c);
+		 for(String s:c)
+		 {
+			 System.out.println(s);
+		 }
+		
+	}
+}
+
+o/p:
+====
+[kiran, rajesh, hemanth, arjun, sundar]
+kiran
+rajesh
+hemanth
+arjun
+sundar
+========================================================
+ADDING INTEGER OBJECT AND ACCESSING USING entrySet() method
+------------------------------------
+
+package Collection.afternun.Map;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+public class EntrySetHashMap 
+{
+	public static void main(String[] args)
+	{
+		HashMap<Integer, String> hm1=new HashMap<>();
+		hm1.put(100, "kiran");//entry//4
+		hm1.put(101, "rajesh");//entry//5
+		hm1.put(121, "arjun");//entry//9
+		hm1.put(111, "sundar");//entry//15
+		hm1.put(151, "hemanth");//entry//7
+		
+		Set<Map.Entry<Integer, String>> s=hm1.entrySet();
+		
+		for(Map.Entry<Integer, String> a:s)
+		{
+			System.out.println(a.getKey()+"->"+a.getValue());
+		}
+		
+	}
+
+}
+
+=========================================================================================================
+
+ADDING CUSTOM OBJECT INTO HASHMAP:
+================
+package Collection.afternun.Map;
+
+import java.util.Objects;
+
+public class Student 
+{
+	public int id;
+	String name;
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	public boolean equals(Object o)
+	{
+		Student s=(Student)o;
+		return this.hashCode()==s.hashCode();
+	}
+	
+	public int hashCode()
+	{
+		return Objects.hash(id,name,age);
+	}
+	
+
+}
+
+
+package Collection.afternun.Map;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+public class AddingCustomHashMap 
+{
+	public static void main(String[] args) 
+	{
+		HashMap<Student, Integer> hm=new  HashMap<>();
+		hm.put(new Student(101, "hemanth", 20), 101);
+		hm.put(new Student(121, "motu", 22), 121);
+		hm.put(new Student(121, "motu", 22), 121);
+		hm.put(new Student(120, "patlu", 25), 120);
+		hm.put(new Student(115, "chingam", 23), 115);
+		hm.put(new Student(116, "dr.jatka", 60), 116);
+		hm.put(new Student(118, "gasitheram", 25), 118);
+		
+//		Set<Map.Entry<Student, Integer>> s=hm.entrySet();
+		for(Map.Entry<Student, Integer> entry:hm.entrySet())
+		{
+			System.out.println(entry);
+		}
+	}
+}
+O/P:
+====
+Student [id=118, name=gasitheram, age=25]=118
+Student [id=115, name=chingam, age=23]=115
+Student [id=120, name=patlu, age=25]=120
+Student [id=101, name=hemanth, age=20]=101
+Student [id=121, name=motu, age=22]=121
+Student [id=116, name=dr.jatka, age=60]=116
+===========================================================================================================
+
+LinkedHashMap:
+==========
+LinkedHashMap is a subclass of HashMap that maintains the insertion order of elements using a doubly linked list.
+
+Characteristics:
+-> Maintains insertion order	Unlike HashMap, it preserves the order of key-value pairs.
+-> Uses a doubly linked list	Maintains a linked list of entries to preserve order.
+-> Allows null keys & values	Just like HashMap, it allows one null key and multiple null values.
+-> Faster iteration	Since it maintains a linked list, iterating over elements is faster than HashMap.
+-> Not Thread-Safe	Use Collections.synchronizedMap() or ConcurrentHashMap for thread safety.
+
+Constructors:
+LinkedHashMap()- Constructs an empty insertion-ordered LinkedHashMap instance with the default initial capacity (16) and load factor (0.75).
+LinkedHashMap(int initialCapacity)
+LinkedHashMap(int initialCapacity, float loadFactor)
+LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)
+LinkedHashMap(Map<? extends K,? extends V> m)
+-> Fast lookups and insertions (O(1)).
+-> Iteration is faster than HashMap because of the linked list.
+
+ Conclusion
+-> LinkedHashMap preserves insertion order using a doubly linked list.
+-> Fast operations (O(1)), but slightly slower than HashMap due to extra memory usage.
+-> Supports access-order mode for LRU caching.
+-> Not thread-safe (Use ConcurrentHashMap for multi-threading)
+
+
+ADDING CUSTOM OBJECTS INTO LINKEDHASHMAP:[SAME ABOVE STUDENT CLASS]
+======================
+package Collection.afternun.Map;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+public class AddingIntoLinkedHashMap 
+{
+	//MAINTAINS INSERTION ORDER
+	public static void main(String[] args) 
+	{
+		LinkedHashMap<Student, Integer> hm=new  LinkedHashMap();
+		hm.put(new Student(101, "hemanth", 20), 101);
+		hm.put(new Student(121, "motu", 22), 121);
+		hm.put(new Student(121, "motu", 22), 121);
+		hm.put(new Student(120, "patlu", 25), 120);
+		hm.put(new Student(115, "chingam", 23), 115);
+		hm.put(new Student(116, "dr.jatka", 60), 116);
+		hm.put(new Student(118, "gasitheram", 25), 118);
+		
+//		Set<Map.Entry<Student, Integer>> s=hm.entrySet();
+		for(Map.Entry<Student, Integer> entry:hm.entrySet())
+		{
+			System.out.println(entry);
+		}
+	}
+}
+O/P:
+-----
+Student [id=101, name=hemanth, age=20]=101
+Student [id=121, name=motu, age=22]=121
+Student [id=120, name=patlu, age=25]=120
+Student [id=115, name=chingam, age=23]=115
+Student [id=116, name=dr.jatka, age=60]=116
+Student [id=118, name=gasitheram, age=25]=118
+================================================================================================
+
+TreeMap:
+===========
+TreeMap is a class and It is a Red-Black Tree based implementation of Map, where elements (key-value pairs) are sorted based on the keys.
+  
+Characteristics:
+-> Stores key-value pairs	Each key is mapped to a value.
+-> Sorted order	Keys are stored in ascending order by default.
+-> Uses Red-Black Tree	Provides O(log n) complexity for operations.
+-> No duplicate keys	Keys must be unique, but values can be duplicated.
+-> Does not allow null keys	Unlike HashMap, it throws a NullPointerException for null keys.
+-> Thread-Unsafe	Needs external synchronization for thread safety.
+-> Implements NavigableMap	Provides methods for range searches and closest matches.
+
+Constructors:
+TreeMap()- Initial capacity is Zero.
+TreeMap(Comparator<? super K> comparator)
+TreeMap(Map<? extends K,? extends V> m)
+
+Extra Methods:
+firstKey()	Returns the smallest key.
+lastKey()	Returns the largest key.
+higherKey(K key)	Returns the next higher key.
+lowerKey(K key)	Returns the next lower key.
+ceilingKey(K key)
+foortKey()
+descendingKeySet()
+
+Note:The tree automatically balances itself after insertions and deletions.
+-> Each node contains key, value, left child, right child, and parent reference.
+-> If a collision occurs (same key), it replaces the value instead of storing duplicates.
+
+
+
+
+ADDING CUSTOM OBJECT INTO TREEMAP:
+=========
+WE HAVE TO MAKE CUSTOM OBJECT AS COMPARABLE  TYPE AND OVERRIDE compareTO()
+OR
+WE CAN ALSO USE COMPARATOR INTERFACE.
+
+
+SORTING BASED ON ID:
+-----------------------
+package Collection.afternun.Map;
+import java.util.Objects;
+public class Student implements Comparable<Student>
+{
+	public int id;
+	String name;
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	public boolean equals(Object o)
+	{
+		Student s=(Student)o;
+		return this.hashCode()==s.hashCode();
+	}
+	
+	public int hashCode()
+	{
+		return Objects.hash(id,name,age);
+	}
+	@Override
+	public int compareTo(Student o) 
+	{
+		return this.id-o.id;
+	}
+}
+
+
+package Collection.afternun.Map;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class AddingIntoTreeMap 
+{
+	public static void main(String[] args) 
+	{
+		TreeMap<Student, Integer> hm=new  TreeMap<>();
+		hm.put(new Student(101, "hemanth", 20), 101);
+		hm.put(new Student(121, "motu", 22), 121);
+		hm.put(new Student(121, "motu", 22), 121);
+		hm.put(new Student(120, "patlu", 25), 120);
+		hm.put(new Student(115, "chingam", 23), 115);
+		hm.put(new Student(116, "dr.jatka", 60), 116);
+		hm.put(new Student(118, "gasitheram", 25), 118);
+		
+//		Set<Map.Entry<Student, Integer>> s=hm.entrySet();
+		for(Map.Entry<Student, Integer> entry:hm.entrySet())
+		{
+			System.out.println(entry);
+		}
+	}
+}
+
+
+O/P:
+---
+Student [id=101, name=hemanth, age=20]=101
+Student [id=115, name=chingam, age=23]=115
+Student [id=116, name=dr.jatka, age=60]=116
+Student [id=118, name=gasitheram, age=25]=118
+Student [id=120, name=patlu, age=25]=120
+Student [id=121, name=motu, age=22]=121
+

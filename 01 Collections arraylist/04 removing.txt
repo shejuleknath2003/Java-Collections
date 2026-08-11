@@ -1,0 +1,219 @@
+when we are removing objects from the collection, the remove method used to remove elements from collection will internally call the equals method to compare and then remove.
+note:
+===
+in wrapper classes and string class equals() method is already overridden to compare based on values.
+
+
+ Integer objects:
+=============
+package Collectionsbatch1.Remove;
+
+import java.util.ArrayList;
+
+public class DemoRemove 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList al=new ArrayList();//collection type object
+		al.add(10);
+		al.add(20);
+		al.add(30);
+		al.add(40);
+		al.add(50);
+		System.out.println("before "+al);
+		//list interface method will be called
+//		al.remove(30);//considers it as index
+		
+		//Collection interface method
+		al.remove((Integer)30);//considers it as object
+		System.out.println("after "+al);
+		
+	}
+
+}
+o/p:
+===
+before [10, 20, 30, 40, 50]
+after [10, 20, 40, 50]
+
+
+
+
+removing string:
+========
+package Collectionsbatch1.Remove;
+
+import java.util.ArrayList;
+
+public class DemoRemoveString 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList al=new ArrayList();
+		
+		al.add("hello");
+		al.add("how");
+		al.add("are");
+		al.add("you");
+		al.add("pushpa");
+
+		al.remove("pushpa");
+		
+		System.out.println(al);
+	}
+}
+o/p:
+====
+[hello, how, are, you, pushpa]
+[hello, how, are, you]
+=========================================================
+
+REMOVING CUSTOM OBJECT:
+==================================
+If we want to remove custom object we have to override equals method in that class so that it compares the values instead of references.
+
+package Collectionsbatch1;
+
+import Collectionsbatch1.Remove.Employee;
+
+public class Employee 
+{
+	String name;
+	int age;
+	public Employee(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", age=" + age + "]";
+	}
+	//overriding equals method to compare values
+	public boolean equals(Object o)
+	{
+		Employee e=(Employee)o;
+		if(!this.name.equals(e.name))
+			return false;
+		if(this.age!=e.age)
+			return false;
+		return true;
+		
+	}
+
+}
+
+package Collectionsbatch1.Remove;
+import java.util.ArrayList;
+
+import Collectionsbatch1.Employee;
+public class DemoRemoveCustom 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<Employee> al=new ArrayList();
+		Employee e1=new Employee("hemanth", 20);
+		Employee e2=new Employee("vimal", 21);
+		Employee e3=new Employee("tushar", 22);
+		Employee e4=new Employee("ritesh", 21);
+		Employee e5=new Employee("dhanish", 21);
+		
+		al.add(e1);
+		al.add(e2);
+		al.add(e3);
+		al.add(e4);
+		al.add(e5);
+		Employee e=new Employee("vimal", 21);
+		al.remove(e);//internally calls equals method
+		System.out.println(al);
+		
+	}
+}
+
+
+o/p:
+======
+
+[Employee [name=hemanth, age=20], Employee [name=vimal, age=21], Employee [name=tushar, age=22], Employee [name=ritesh, age=21], Employee [name=dhanish, age=21]]
+
+
+
+[Employee [name=hemanth, age=20], Employee [name=tushar, age=22], Employee [name=ritesh, age=21], Employee [name=dhanish, age=21]]
+
+
+
+
+================================================================
+List interface:
+to remove elements:
+=====
+3] object remove (int index)
+
+4]object set (int index, object element)
+
+===============================================================================================================
+
+
+
+removing based on attribute:
+=============
+package ArrayList;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class RemoveTheElementBasedOnAtrribute {
+
+	public static void main(String[] args) {
+		ArrayList<Employee> al = new ArrayList<Employee>();
+
+		al.add(new Employee("abc", 101));
+		al.add(new Employee("bcd", 102));
+		al.add(new Employee("efg", 103));
+		al.add(new Employee("xyz", 104));
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter the id to be removed :");
+		System.out.println(removeEmp(al, sc.nextInt()));
+	}
+	
+	public static ArrayList<Employee> removeEmp(ArrayList<Employee> c,int key)
+	{
+		Employee e1 = null;
+		for(Employee e : c)
+		{
+			if(key==e.salary)
+			{
+				e1=e;
+//				c.remove(e);//ConcurrentModificationException
+				break;
+			}
+		}
+		c.remove(e1);
+		return c;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

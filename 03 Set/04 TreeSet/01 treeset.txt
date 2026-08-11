@@ -1,0 +1,237 @@
+TreeSet:
+==========
+When ever we want arrange the elements in some sorting order we can  go with TreeSet.
+
+Internal Implementation of TreeSet: 
+
+Internally, TreeSet is backed by a TreeMap, where:
+Keys are the elements of the set.
+Values are dummy objects (PRESENT).
+
+Constructors: 
+TreeSet()
+TreeSet(Collection)
+TreeSet(Comparator)
+
+Characteristics:
+========
+->It stores elements in sorted order and uses a self-balancing Red-Black Tree for internal implementation.
+->There is no initial capacity.
+->Ordered Elements	-->Elements are stored in ascending order (sorted order).
+->No Duplicates	        -->TreeSet does not allow duplicate elements.
+->Implements SortedSet & NavigableSet -->Provides additional methods for navigation (higher(), lower(), etc.).
+->Red-Black Tree	        -->Internally uses a self-balancing Red-Black Tree for efficient operations.
+->Null Values?	        -->Not allowed in Java 7+ (throws NullPointerException).
+->Thread Safety	        -->Not synchronized ()(Use Collections.synchronizedSortedSet() for thread safety).
+
+Note:
+=======
+-> TreeSet internally uses compareTo() or compare() method to sort.
+->TreeSet is slower than HashSet (O(1) insert/search) but maintains sorting. 
+
+Extra Navigational Methods:
+==========
+Method	        Description	                                  Example Output 
+([10, 20, 30, 40])
+first()  	Returns the first element	                             10
+last()	        Returns the last element	                             40
+higher(x)	Returns the next higher element after x	              numbers.higher(20) → 30
+lower(x)	Returns the next lower element before x               numbers.lower(30) → 20
+
+ When to Use TreeSet?
+we Use TreeSet when:
+->You need sorted elements.
+->You need fast access to min/max elements.
+
+Conclusion:
+=====
+ TreeSet stores unique elements in sorted order.
+ Internally, it uses a Red-Black Tree (TreeMap).
+ Performance is O(log n) for insertion, deletion, and searching.
+ Supports navigation methods (higher(), lower(), etc.).
+ Slower than HashSet but provides sorting.
+
+Feature		TreeSet			HashSet			LinkedHashSet
+
+Ordering	Sorted (Ascending)	Unordered	      Insertion Order
+Null Allowed?	❌ No (Java 7+)	          ✅ Yes	        ✅ Yes
+Performance	Slower (O(log n))	Fastest (O(1))	        Medium (O(1))
+Implementation	Red-Black Tree	     Hash Table                 Hash Table + Doubly Linked List
+                                 (Buckets + Linked List/Tree)	
+
+Note:
+For HashSet and LinkedHashSet we need to override hashCode() and equals()(Manditory)
+But in TreeSet duplicates are removed with the help of compareTo() or compare(). (if both the objects are same it will return 0)
+
+==========================================================================================
+ex program for wrapper class object [draw the diagram after this program]
+====
+package Collection.TreeSet;
+import java.util.TreeSet;
+public class Demo 
+{
+	public static void main(String[] args)
+	{
+		TreeSet<Integer> t=new TreeSet<>();
+		t.add(30);
+		t.add(22);
+		t.add(26);
+		t.add(32);
+		t.add(93);
+		t.add(100);
+		System.out.println(t);
+	}
+}
+o/p:
+[22, 26, 30, 32, 93, 100]
+=====================================================================================
+ADDING CUSTOM OBJECT WHICH IS OF COMPARABLE TYPE:
+=============================
+EX:
+===
+package Collection.sortingTreeset;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.TreeSet;
+
+import Collection.HashSet.Custom.Student;
+public class Student implements Comparable<Student>
+{
+	int id;
+	String name;			
+	int age;
+	public Student(int id, String name, int age) 
+	{
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	public static void display(TreeSet<Student> hs)
+	{
+		System.out.println("============");
+		for(Student s:hs)
+		{
+			System.out.println(s);
+		}
+		System.out.println("============");
+	}
+
+	//avoids duplicates as well as sorts
+	@Override
+	public int compareTo(Student o) 
+	{
+		return this.id-o.id;
+	}
+}
+
+
+package Collection.sortingTreeset;
+import java.util.TreeSet;
+public class DemoStudentTreeset 
+{
+	public static void main(String[] args)
+	{
+		TreeSet<Student> t=new TreeSet<>();
+		Student s1=new Student(101, "kiran", 20);
+		Student s2=new Student(125, "betsee", 22);
+		Student s3=new Student(115, "motu", 26);
+		Student s4=new Student(121, "shinchan", 16);
+		Student s5=new Student(120, "kalya", 22);
+		Student s6=new Student(121, "kalya", 22);
+		t.add(s1);
+		t.add(s2);
+		t.add(s3);
+		t.add(s4);
+		t.add(s5);
+		t.add(s6);
+//		t.add(null);//NullPointerException
+		Student.display(t);
+	}
+}
+O/P:
+====
+============
+Student [id=101, name=kiran, age=20]
+Student [id=115, name=motu, age=26]
+Student [id=120, name=kalya, age=22]
+Student [id=121, name=shinchan, age=16]
+Student [id=125, name=betsee, age=22]
+============
+
+=============================================================================================
+ex:
+ADDING CUSTOM OBJECT AND SORTING USING COMPARATOR TYPE OBJECT
+----------------------------
+package Collection.sortingTreeset;
+import java.util.Comparator;
+public class SortBasedOnAge implements Comparator<Student>
+{
+	//SORTS AND AVOIDS DUPLICATES
+	//SO DUPLICATE AGES WILL NOT BE ADDED
+	@Override
+	public int compare(Student o1, Student o2) 
+	{
+		return o1.age-o2.age;
+	}
+}
+
+
+package Collection.sortingTreeset;
+import java.util.TreeSet;
+public class DemoSortingBasedOnAge
+{
+	public static void main(String[] args)
+	{
+		//passing comparator object to TreeSet 
+		TreeSet<Student> t=new TreeSet<>(new SortBasedOnAge());
+		Student s1=new Student(101, "kiran", 20);
+		Student s2=new Student(125, "betsee", 22);
+		Student s3=new Student(115, "motu", 26);
+		Student s4=new Student(121, "shinchan", 16);
+		Student s5=new Student(120, "kalya", 22);
+		Student s6=new Student(121, "kalya", 22);
+		t.add(s1);
+		t.add(s2);
+		t.add(s3);
+		t.add(s4);
+		t.add(s5);
+		t.add(s6);
+//		t.add(null);//NullPointerException
+		Student.display(t);
+	}
+}
+O/P:
+============
+Student [id=121, name=shinchan, age=16]
+Student [id=101, name=kiran, age=20]
+Student [id=125, name=betsee, age=22]
+Student [id=115, name=motu, age=26]
+============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

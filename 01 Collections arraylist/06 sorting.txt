@@ -1,0 +1,192 @@
+Collections:
+======
+it is a utility class present in java.util package.
+
+
+sorting wrapper object:
+================
+package Collection.afternun;
+import java.util.ArrayList;
+import java.util.Collections;
+public class SortBasedOnInteger 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<Integer> al1=new ArrayList();//collection type object// capacity 10
+		al1.add(30);//auto boxing
+		al1.add(10);
+		al1.add(25);
+		al1.add(7);
+		al1.add(65);
+		al1.add(80);
+		al1.add(16);		
+		System.out.println("before sorting "+al1);
+		Collections.sort(al1);
+		System.out.println("after sorting "+al1);	
+	}
+}
+O/p:
+before sorting [30, 10, 25, 7, 65, 80, 16]
+after sorting [7, 10, 16, 25, 30, 65, 80]
+=====================================================================================================================
+
+sorting string object:
+=============================
+package Collection.afternun;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class SortBasedOnString 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<>();
+		al.add("hello");
+		al.add("how");
+		al.add("are");
+		al.add("you");
+		al.add("pushpa");
+		System.out.println(al);
+		Collections.sort(al);
+		System.out.println(al);
+		
+	}
+}
+o/p:
+before sorting [hello, how, are, you, pushpa]
+after sorting [are, hello, how, pushpa, you]
+================================================================================================================================
+
+
+sorting custom objects:
+=======================
+->when we want to sort custom objects first we need to think based on what it should be sorted??
+->custom objects can be sorted based on the properties of the object.
+->so when we want to sort custom objects either we have to use comparable interface or comparator interface , just like how we have done in arrays.
+
+ex:
+==
+making student as comparable type and overriding compareTo() method
+=======================
+package Collection.afternun.searching;
+
+public class Student implements Comparable<Student>
+{
+	public int id;
+	String name;
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	public boolean equals(Object o)
+	{
+		Student s=(Student)o;
+		if(this.id!=s.id) 
+			return false;
+		if(!this.name.equals(s.name)) 
+			return false;
+		if(this.age!=s.age) 
+			return false;
+		
+		return true;
+	}
+	@Override
+	public int compareTo(Student o) {
+		return this.id-o.id;
+	}
+}
+
+
+package Collection.afternun;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import Collection.afternun.searching.Student;
+import Comparable.SortBasedOnName;
+
+public class SortBasedOnCustom 
+{
+	public static void main(String[] args)
+	{
+		ArrayList<Student> al=new ArrayList<>();
+		al.add(new Student(110, "arjun", 20));
+		al.add(new Student(102, "lakshmi", 18));
+		al.add(new Student(101, "shake", 25));
+		al.add(new Student(145, "ajay", 26));
+		al.add(new Student(201, "arjun", 20));
+		System.out.println("before sorting :"+al);
+		Collections.sort(al);
+		System.out.println("after sorting :"+al);
+	}
+
+}
+o/p:
+===
+before sorting :[Student [id=110, name=arjun, age=20], Student [id=102, name=lakshmi, age=18], Student [id=101, name=shake, age=25], Student [id=145, name=ajay, age=26], Student [id=201, name=arjun, age=20]]
+
+after sorting :[Student [id=101, name=shake, age=25], Student [id=102, name=lakshmi, age=18], Student [id=110, name=arjun, age=20], Student [id=145, name=ajay, age=26], Student [id=201, name=arjun, age=20]]
+
+
+====================================================================
+
+
+when we want to sort based on more than one attribute we can use comparator interface.
+
+sort based on student name:
+====================
+package Collection.afternun.searching;
+import java.util.Comparator;
+public class SortBasedOnName implements Comparator<Student>
+{
+
+	@Override
+	public int compare(Student o1, Student o2) {
+		return o1.name.compareTo(o2.name);
+	}
+}
+
+package Collection.afternun;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import Collection.afternun.searching.Student;
+import Comparable.SortBasedOnName;
+
+public class SortBasedOnCustom 
+{
+	public static void main(String[] args)
+	{
+		ArrayList<Student> al=new ArrayList<>();
+		al.add(new Student(110, "arjun", 20));
+		al.add(new Student(102, "lakshmi", 18));
+		al.add(new Student(101, "shake", 25));
+		al.add(new Student(145, "ajay", 26));
+		al.add(new Student(201, "arjun", 20));
+		System.out.println("before sorting :"+al);
+		Collections.sort(al,new SortBasedOnName());//calling sort method by passing comparator object
+		System.out.println("after sorting :"+al);
+	}
+}
+
+o/p:
+======
+before sorting :[Student [id=110, name=arjun, age=20], Student [id=102, name=lakshmi, age=18], Student [id=101, name=shake, age=25], Student [id=145, name=ajay, age=26], Student [id=201, name=arjun, age=20]]
+
+
+after sorting :[Student [id=145, name=ajay, age=26], Student [id=110, name=arjun, age=20], Student [id=201, name=arjun, age=20], Student [id=102, name=lakshmi, age=18], Student [id=101, name=shake, age=25]]
+
+
+==============================================================================================================================================

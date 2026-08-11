@@ -1,0 +1,28 @@
+Vector class:
+-------------
+-->It is a child  class of list present in java.util package.
+-->It is a Legacy class(created in 1.0v (collection framework is introduced in 1.2v))
+
+Internal implementation: Arrays
+
+Characteristics of Vector:
+--------------------------
+1.Initial capacity is 10.
+2.NewCapacity = oldcapacity*2(it will double the capacity)
+3.We can store duplicates
+4.insertion order is preserved.
+5.We can store multiple null.
+6.Zero based indexing
+7.stores homogeneous and heterogeneous data.
+8.vector is Thread safe, in Vector methods are synchronized
+
+Constrctor:
+-----------
+Vector()
+Vector(Collection c)
+Vector(int initialcapacity)
+
+Note: Vector is old version and ArrayList is the new Version.
+Since the vector is thread safe it will take more time to execute multiple tasks(less efficiency).
+ 
+======================================================================================

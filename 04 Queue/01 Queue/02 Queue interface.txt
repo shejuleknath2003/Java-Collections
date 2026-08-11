@@ -1,0 +1,24 @@
+Queue:-
+--------
+--> java.util package.
+--> used to represent FIFO (First-In-First-Out).elements are processed in the order they are added.
+
+Application:
+-------------
+Order Processing Systems: Orders are handled in the order they are received.
+Ticket Booking Systems: Users are queued during high-demand booking (e.g., trains, concerts).
+Task Scheduling: Queues are used in job/task schedulers to manage execution.
+Message Queues: Used for inter-process communication in distributed systems 
+Printer Queue: Documents are printed in the order they are received.
+Customer Service / Call Center: Calls are answered in the order they arrive.
+
+Methods in Queue:
+-----------------
+| Method       | Description                                         |
+| ------------ | --------------------------------------------------- |
+| ` E add(E e)`   | Inserts element; throws exception if fails  //  throws IllegalStateException: if Queue is full
+| `boolean offer(E e)` | Inserts element; returns `false` if fails     
+| `E remove()`   | Removes and returns head; throws exception if empty | // No such element exception
+| `E poll()`     | Removes and returns head; returns `null` if empty   |
+| `E element()`  | Retrieves head; throws exception if queue is empty  |// No such element exception
+| `E peek()`     | Retrieves head; returns `null` if queue is empty    |

@@ -1,0 +1,183 @@
+when key is a wrapper object
+========================================================================================
+searching:
+======
+package Collection.afternun.searching;
+import java.util.ArrayList;
+public class IntegerSearching 
+{
+	public static void main(String[] args) {
+		ArrayList<Integer> al1=new ArrayList();//collection type object// capacity 10
+		al1.add(10);//auto boxing
+		al1.add(20);
+		al1.add(30);
+		al1.add(40);
+		al1.add(50);
+		
+		System.out.println(al1.contains(30));//internally calls equals method
+		System.out.println(al1);
+	}
+}
+=================================================================================
+
+searching when key is String object:
+=========
+package Collection.afternun.searching;
+import java.util.ArrayList;
+public class StringSearching 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<String> al=new ArrayList<>();
+		al.add("hello");
+		al.add("how");
+		al.add("are");
+		al.add("you");
+		al.add("pushpa");
+		//internally uses equals method
+		System.out.println(al.contains("pushpa"));//true internally calls equals method
+		System.out.println(al);
+	}
+}
+
+
+
+=========================================================================
+searching when key is custom object:
+==========================
+note:
+====
+contains() internally calls equals method, if we are not overriding equals method in custom class object class equals method will be called and it compares the reerences.
+so if we are searching custom object we need to override the equals method in custom class in such a way that it should compare the values inside the object.
+
+package Collection.afternun.searching;
+public class Student implements Comparable<Student>
+{
+	public int id;
+	String name;
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	//we need to override equals method in such a way that it compares based on values
+	public boolean equals(Object o)
+	{
+		Student s=(Student)o;
+		if(this.id!=s.id) 
+			return false;
+		if(!this.name.equals(s.name)) 
+			return false;
+		if(this.age!=s.age) 
+			return false;
+		
+		return true;
+	}
+}
+
+
+package Collection.afternun.searching;
+
+import java.util.ArrayList;
+
+public class SearchingStudent 
+{
+	public static void main(String[] args)
+	{
+		ArrayList<Student> al=new ArrayList<>();
+		al.add(new Student(110, "arjun", 20));
+		al.add(new Student(102, "lakshmi", 18));
+		al.add(new Student(101, "shake", 25));
+		al.add(new Student(145, "ajay", 26));
+		al.add(new Student(201, "arjun", 20));
+		
+		Student key=new Student(102, "lakshmi", 18);
+		
+		System.out.println(al.contains(key));//true
+		
+		
+		
+	} 
+
+}
+===============================================================================================================
+
+
+searching when key is property of an object:
+=============
+package Collection.afternun.searching;
+
+import java.util.ArrayList;
+
+public class SearcBasedOnProps 
+{
+	public static void main(String[] args) 
+	{
+		ArrayList<Student> al=new ArrayList<>();
+		al.add(new Student(110, "arjun", 20));
+		al.add(new Student(102, "lakshmi", 18));
+		al.add(new Student(101, "shake", 25));
+		al.add(new Student(145, "ajay", 26));
+		al.add(new Student(201, "arjun", 20));
+		
+		int key=200;
+		System.out.println(al.contains(145));
+		Student TobeSearched=null;
+		for(Student s:al)
+		{
+			if(s.id==key)
+			{
+				TobeSearched=s;
+				break;
+			}
+		}
+		if(TobeSearched!=null)
+			System.out.println("student found :"+TobeSearched);
+		else {
+			System.out.println("student not found");
+		}
+	}
+}
+
+Note:
+indexOf() also internally uses equals method, and returns the index of the element ,
+so when we are using index of method we need to override the equals method in custom class.
+ex:
+package Collection.afternun.searching;
+
+import java.util.ArrayList;
+
+public class SearchingStudent 
+{
+	public static void main(String[] args)
+	{
+		ArrayList<Student> al=new ArrayList<>();
+		al.add(new Student(110, "arjun", 20));
+		al.add(new Student(102, "lakshmi", 18));
+		al.add(new Student(101, "shake", 25));
+		al.add(new Student(145, "ajay", 26));
+		al.add(new Student(201, "arjun", 20));
+		
+		Student key=new Student(102, "lakshmi", 18);
+		System.out.println(al.indexOf(key));//returns the index 1
+		//we have to override equals method in student class
+		
+		
+	} 
+
+}
+
+
+
+
+
+
+
+
+

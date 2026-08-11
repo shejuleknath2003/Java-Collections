@@ -1,0 +1,235 @@
+
+Priority Queue:
+---------------
+--> Generic class present in java.util package
+--> Where the elements are added based on the priority.
+
+Internal Implementation:
+------------------------
+Heap Data Structure(implemented by using Array(Easy parent-child index calculations, no need of pointer))(type of Binary Tree DS)
+Heap - complete binary tree (Which satisfies heap property).
+--> Min Heap (Default)(Smallest element comes first)(parent<=child) 
+--> Max Heap (We can Comparator)((Largest element comes first)(parent>=child)
+
+Constructors:
+-------------
+PriorityQueue()
+PriorityQueue(Collection c)
+PriorityQueue(Comparator c)
+PriorityQueue(int initialCapacity)
+PriorityQueue(int initialCapacity, Comparator c)
+
+Formula to find index of child elements:
+--------
+left child index  = Parent Index*2
+right child index = Parent Index*2+1.
+
+Characteristics:
+----------------
+Default capacity is 11.(load factor is 100% and new capacity= old *1.5(50%))
+1. Only Homogeneous are allowed.
+2. No null values are allowed.
+3. Duplicates are allowed.
+4. No order of insertion.
+5. All the objects should be comparable type or we need to use comparator.
+6. No indexing (Elements will be accessed based on the priority not by index)
+7. override equals() for contains()
+8. Not thread safe.
+
+Note:
+--> Element will be accessed by using Level order Traversing.
+
+Application:
+--> Whenever we want to process or fetch the elements based on the priority we use Priority Queue.
+(Ex: In garbage collection elements will be Removed based on the priority)
+
+=================================================================================================================
+EX:
+ADDING INTEGER OBJECTS INTO PRIORITY QUEUE
+---------------------------------------
+package Collection.Queue.priority;
+import java.util.PriorityQueue;
+public class Demo 
+{
+	//10,7,18,3,20,13,21,21,7
+	public static void main(String[] args)
+	{
+		
+		PriorityQueue<Integer> pq=new PriorityQueue<>();
+		pq.offer(10);
+		pq.offer(7);
+		pq.offer(18);
+		pq.offer(3);
+		pq.offer(20);
+		pq.offer(13);
+		pq.offer(21);
+		pq.offer(21);
+		pq.offer(7);
+		System.out.println(pq);
+	}
+}
+O/P:
+=====
+[3, 7, 13, 7, 20, 18, 21, 21, 10]
+
+
+DRAW THE DIAGRAM AFTER THIS. SIMPLY DONT COPY THIS LINE ALSO, USE YOUR SENSES , SENSE LESS PEOPLE.
+=====================================================================
+
+====================================================================================================================
+ADDING CUSTOM OBJECT INTO PRIORITY QUEUE:[COMPARABLE TYPE]
+--------------------------------
+package Collection.Queue.priority.custom;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.PriorityQueue;
+import java.util.TreeSet;
+public class Student implements Comparable<Student>
+{
+	int id;
+	String name;			
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	public static void display(PriorityQueue<Student> hs)
+	{
+		System.out.println("============");
+		for(Student s:hs)
+		{
+			System.out.println(s);
+		}
+		System.out.println("============");
+	}
+	//MINIMUM AGE WILL BE AT THE PARENT NODE
+	@Override
+	public int compareTo(Student o) 
+	{
+		return this.age-o.age;
+	}
+}
+
+package Collection.Queue.priority.custom;
+import java.util.PriorityQueue;
+public class AddingStudentIntoPriority 
+{
+	public static void main(String[] args)
+	{
+		PriorityQueue<Student> pq=new PriorityQueue<>();
+		Student s1=new Student(101, "kiran", 20);
+		Student s2=new Student(125, "betsee", 22);
+		Student s3=new Student(115, "motu", 26);
+		Student s4=new Student(121, "shinchan", 16);
+		Student s5=new Student(120, "kalya", 22);
+		Student s6=new Student(121, "shinchan", 16);
+		pq.offer(s1);
+		pq.offer(s2);
+		pq.offer(s3);
+		pq.offer(s4);
+		pq.offer(s5);
+		pq.offer(s6);
+		Student.display(pq);
+	}
+}
+O/P:
+======
+============
+Student [id=121, name=shinchan, age=16]
+Student [id=101, name=kiran, age=20]
+Student [id=121, name=shinchan, age=16]
+Student [id=125, name=betsee, age=22]
+Student [id=120, name=kalya, age=22]
+Student [id=115, name=motu, age=26]
+============
+===============================================================================
+
+ADDING CUSTOM OBJECT AND PASSING COMPARATOR TYPE OBJECT TO PRIORITY QUEUE: 
+
+package Collection.Queue.priority.custom;
+
+import java.util.Comparator;
+
+public class SortBasedOnId implements Comparator<Student>
+{
+
+	@Override
+	public int compare(Student o1, Student o2) 
+	{
+		return o1.id-o2.id;
+	}
+}
+
+package Collection.Queue.priority.custom;
+import java.util.PriorityQueue;
+public class AddComparatorStudent 
+{
+	public static void main(String[] args)
+	{
+		//PASSING COMPARATOR TYPE OBJECT
+		PriorityQueue<Student> pq=new PriorityQueue<>(new SortBasedOnId());
+		Student s1=new Student(101, "kiran", 20);
+		Student s2=new Student(125, "betsee", 22);
+		Student s3=new Student(115, "motu", 26);
+		Student s4=new Student(121, "shinchan", 16);
+		Student s6=new Student(121, "shinchan", 16);
+		Student s5=new Student(120, "kalya", 22);
+		pq.offer(s1);
+		pq.offer(s2);
+		pq.offer(s3);
+		pq.offer(s4);
+		pq.offer(s5);
+		pq.offer(s6);
+		Student.display(pq);
+	}
+
+}
+O/P:
+====
+============
+Student [id=101, name=kiran, age=20]
+Student [id=120, name=kalya, age=22]
+Student [id=115, name=motu, age=26]
+Student [id=125, name=betsee, age=22]
+Student [id=121, name=shinchan, age=16]
+Student [id=121, name=shinchan, age=16]
+============
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

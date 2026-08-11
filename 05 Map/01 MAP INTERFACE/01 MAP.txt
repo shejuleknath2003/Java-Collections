@@ -1,0 +1,64 @@
+Map: 
+==========
+It is an interface present in java.util package where the data will be stored in the form of key-value pairs. It is an generic interface where we can give two parameters<K,V>. 
+
+Characteristics:
+=================
+-->Duplicate keys are not allowed.
+--> only one null key is allowed.
+--> Duplicate values are allowed
+--> multiple null values are allowed.
+--> There is no indexing
+--> there is no order of insertion
+--> It can store both homogeneous & heterogeneous elements.
+
+
+Methods in Map:
+RT	Method			Description
+
+V	put(K key, V value)	Adds a key-value pair
+
+void	putAll(Map)		Copies one Map into another Map.
+
+V	get(K key)	        Returns the value for the given key
+
+V	remove(K key)	        Removes an entry by key
+
+boolean	containsKey(K key)	Checks if a key exists
+
+boolean	containsValue(V value)	Checks if a value exists
+
+int	size()	                Returns the number of key-value pairs
+
+boolean	isEmpty()	        Checks if the map is empty
+
+Set<T>	keySet()	        Returns a Set of all keys
+
+Collection<V>	values()	        Returns a Collection of all values
+
+Set<Entry>	entrySet()	        Returns a Set of key-value pairs
+
+V		getOrDefault(Object key, V defaultValue) Returns the value to which the specified key is mapped, or defaultValue if this map contains no mapping for the key.
+
+Entry interface:
+=====
+ It is an nested Interface of Map. It represents a key-value pair stored in a Map.
+
+-> Each entry consists of a key and a value.
+-> Entry<K, V> is used to iterate over key-value pairs in a Map.
+
+Methods:
+K getKey()	Returns the key of the entry.
+V getValue()	Returns the value of the entry.
+V setValue(V value)	Updates the value for the key
+
+->entrySet() returns a Set of Map.Entry objects.
+->Using getKey() and getValue(), we access the key-  pairs.
+
+Note:
+-> Map.Entry represents a key-value pair in a Map.
+-> Used in entrySet() for iterating over a Map.
+-> Provides methods like getKey(), getValue(), and setValue().
+-> Entries in HashMap are stored in buckets as linked nodes.
+-> Entries in TreeMap are sorted automatically.
+-------------------------------------------------------------------------------------------------------------------------------------------------------

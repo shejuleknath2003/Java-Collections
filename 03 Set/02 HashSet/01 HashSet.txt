@@ -1,0 +1,188 @@
+HashSet:
+==================
+All the Characteristics of set will be applicable for HashSet.
+
+Internal Implementation : HashMap(Internally, HashMap consists of an array of Nodes (buckets). Each bucket stores entries (key-value pairs) in the form of Nodes.)
+
+Node (Entry) Structure
+-----
+Each key-value pair in a HashMap is stored in an Entry (Node) object:
+hash → The computed hash code of the key.
+key → The key object.[the data that we are storing]
+value → The value associated with the key.
+next → Pointer to the next node (used in chaining for collision resolution).
+
+
+
+Key Characteristics:
+==========
+No Duplicates – Only unique elements are stored.
+Unordered Storage – It does not maintain any order of elements.
+Allows null Values – But only one null value is permitted.
+Fast Performance – add(), remove(), contains(), and size() operate in O(1) average time complexity.
+Not Thread-Safe – If used in multithreading, it must be synchronized externally.
+
+Constructors of HashSet
+HashSet provides different constructors:
+
+HashSet()
+=========
+Creates an empty HashSet with default capacity (16) and load factor (0.75).
+
+HashSet(int initialCapacity)	
+=====================           
+Creates a HashSet with a specified initial capacity.
+
+HashSet(int initialCapacity, float loadFactor)	
+===============================
+Defines the initial capacity and load factor.
+
+HashSet(Collection<? extends E> c)	
+===================================
+Creates a HashSet from an existing collection.
+
+a) What is Load Factor?
+The load factor defines when the HashMap should increase its size. The default load factor is 0.75, meaning:
+If 75% of the bucket array is full, the capacity is doubled.
+
+b) What is Rehashing?
+When the size exceeds the load factor threshold, Java:
+Doubles the bucket array size.
+Recomputes indexes for all elements.
+Re-inserts elements into the new table based on [hashcode%newcapacity].
+
+When Does Rehashing Occur?
+If the capacity is 16 and the load factor is 0.75, rehashing happens after inserting 16 × 0.75 = 12 elements.
+After rehashing, the capacity doubles (i.e., 16 → 32 → 64).
+
+When to Use HashSet?
+Duplicate elements should be prevented.
+Order of elements is not important.
+Frequent addition/removal of elements.
+
+Note:
+Optimization: If the number of elements in a single bucket exceeds 8, the linked list converts into a Red-Black Tree for faster lookup.
+Why? To improve search time from O(n) → O(log n).
+How it Works?
+If bucket size ≤ 8 → Uses a Singly Linked List.
+If bucket size > 8 → Converts to a Red-Black Tree.
+
+Example programs:
+===============
+package Collection.HashSet;
+
+import java.util.HashSet;
+
+public class DemoHashSet 
+{
+	public static void main(String[] args) 
+	{
+		//default loadfactor is 0.75
+		HashSet<Integer> hs=new HashSet<>(16,1.0f);
+		hs.add(16);//will be stored in 0 index
+		hs.add(20);
+		hs.add(30);
+		hs.add(40);
+		hs.add(50);
+		hs.add(50);//duplicates willl not be added
+		hs.add(null);//will be stored in 0 index
+		hs.add(null);
+		System.out.println(hs);
+	}
+}
+o/p:
+====
+[16, null, 50, 20, 40, 30]
+
+===================================================
+
+
+package Collection.HashSet.Custom;
+
+import java.util.HashSet;
+import java.util.Objects;
+
+public class Student
+{
+	int id;
+	String name;			
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	
+	public boolean equals(Object o)
+	{
+		Student s=(Student)o;
+		return this.hashCode()==s.hashCode();
+	}
+	
+	
+	public int hashCode()
+	{
+		return Objects.hash(id,name,age);
+	}
+	
+	
+	
+	public static void display(HashSet<Student> hs)
+	{
+		System.out.println("============");
+		for(Student s:hs)
+		{
+			System.out.println(s);
+		}
+		System.out.println("============");
+		
+	}
+
+}
+
+
+package Collection.HashSet.Custom;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+public class AddingStudent 
+{
+	public static void main(String[] args)
+	{
+		HashSet<Student> hs=new HashSet<>();
+		Student s1=new Student(101, "kiran", 20);
+		Student s2=new Student(125, "betsee", 22);
+		Student s3=new Student(115, "motu", 26);
+		Student s4=new Student(101, "shinchan", 16);
+		Student s5=new Student(120, "kalya", 22);
+		hs.add(s1);
+		hs.add(s2);
+		hs.add(s3);
+		hs.add(s4);
+		hs.add(s5);
+		Student s6=new Student(115, "motu", 26);
+		hs.add(s6);
+		Student.display(hs);
+	}
+}
+
+o/p:
+====
+============
+Student [id=101, name=kiran, age=20]
+Student [id=125, name=betsee, age=22]
+Student [id=101, name=shinchan, age=16]
+Student [id=120, name=kalya, age=22]
+Student [id=115, name=motu, age=26]
+============
+
+
+
+
+
+

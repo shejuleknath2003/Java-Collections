@@ -1,0 +1,41 @@
+
+ArrayDeque:
+-----------
+--> java.util package.
+--> It can be used both as a queue (FIFO) and as a stack (LIFO).
+Constructors:
+-------------
+ArrayDeque<>()                   // Default capacity = 16
+ArrayDeque<>(int initialCapacity)
+ArrayDeque<>(Collection c)
+
+Internal Implementation:
+------------------------
+::Internally used Circular Array (A circular array allows efficient use of memory)
+::Automatically doubles the size when full.
+::Indexing is managed by two pointers: head and tail.
+
+As Stack:
+--------
+E	pop()	
+void	push(E e)
+
+As Queue:
+----------
+boolean offer(E e)
+E poll()
+
+Characteristics:
+----------------
+--> Initial capacity is 16.
+--> We can add and remove the elements from both the ends.
+--> It will not allow null values. // null pointer exception
+--> We can store both Homogeneous and Heterogeneous.
+--> No indexing
+--> Insertion order is preserved
+--> Not thread safe (Not synchronized)
+
+Application:
+-----------
+Higly recomented for Stack and Queue operation( Faster than Stack(thread safe) and LinkedList(using more memory))
+

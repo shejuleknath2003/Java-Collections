@@ -1,0 +1,44 @@
+Stack class:
+------------
+-->It is a child class of Vector present in java.util package.
+-->It is a Legacy class(created in 1.0v (collection framework is introduced in 1.2v))
+
+Internal implementation: Arrays  
+
+Characteristics of Stack:
+-------------------------
+1.Initial capacity is 10.
+2.NewCapacity = oldcapacity*2(it will double the capacity)
+3.LIFO structure (Last-In-First-Out).
+4.Insertion order is preserved.
+4.We can store duplicates
+5.We can store multiple null.
+6.Zero based indexing
+7.stores homogeneous and heterogeneous data.
+8.Stack is Thread safe.(extends Vector(in Vector methods are synchronized))
+
+Constructors:
+--------------
+Stack()-->created empty stack with initial capacity 10.
+
+Extra methods in Stack:
+1. E push(E item) -- adds the element onto the top of the Stack
+2. E pop()        -- remove the element at the top of the Stack
+3. E peek()       -- returns the top element.
+4. int search(Object o) -- return the position of the element from the top(1 based position)
+5. Boolean empty() -- checks the stack is empty or not.
+Note:
+Stack<Integer> s = new Stack<Integer>();
+		s.add(100);
+		s.push(20);
+		System.out.println(s);
+
+Here add() and push() will work same.
+Even though add() works, it's not recommended to use it with Stack. Why?
+::add() breaks the LIFO principle of stacks.
+::Always use push() to maintain stack discipline.
+so it is highly recommended to use only stack class method to achieve the behavior of stack data structure.
+
+Applications:
+-------------
+Text editor-undo operation.

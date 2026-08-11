@@ -1,0 +1,310 @@
+============================================================================================
+
+Collection:
+=======
+->Representing a group of objects as a single entity is known as collection.
+->It's main purpose is to store huge amount of data. 
+->It provides multiple methods to store and manipulate data.
+->easy to maintain and manage the objects inside the collection.
+
+Collection Framework :
+===========
+-> It is a set of predefined interfaces, implementation classes, and utility classes. 
+
+-> All the classes and interfaces of CollectionsFramework are present
+in java.util package. 
+
+-> The library contains general-purpose implementation classes and special implementation classes. 
+
+->The collection framework  contains implementations of standard data structures like Stack, Queue, LinkedList, HashMap. 
+
+
+
+Collection interface is extended by 3 different interfaces
+ 1.List<Interface>
+ 2.Set<Interface>
+ 3.Queue<Interface>
+
+implementation classes of List Interface:
+=============
+1.ArrayList
+2.LinkedList
+3.Vector
+
+implementation classes of Queue Interface:
+=============
+4.PriorityQueue
+5.LinkedList
+
+implementation classes of Set Interface:
+=============
+6.Treeset
+7.Hashset
+8.LinkedHashSet
+
+============================================================================================
+
+Collection Interface:-
+=======
+->This interface is a root of collection interface Hierarchy.
+-> The collection Interface defines the standard essential Operations, that can be performed on any type of collection.
+-> It is a child interface of Iterable Interface.
+
+
+
+collection interface has 3 child interfaces 
+1] List
+2] Queue
+3] Set
+
+methods of collection interface:
+================================
+TO ADD ELEMENTS:
+================
+1] boolean add(Object element) Capacity of the object array is the 10 Default capacity.
+
+2]boolean addAll(Collection c)
+
+TO REMOVE ELEMENTS:
+==========
+3] boolean remove(Object element)
+
+4] boolean removeAll(Collection c)
+
+5]  boolean retainAll(Collection c)
+
+6]  void clear()
+
+TO SEARCH ELEMENTS:
+======
+7]  boolean contains(Object element)
+
+8] boolean containsAll(Collection c)
+
+
+
+TO ACCESS ELEMENTS:
+=====
+9] public Iterator iterator() [from Iterable interface]
+
+
+other methods:
+=====
+10]  int size()
+
+11]  boolean isEmpty()
+
+12] public Object[] toArray()
+
+============================================================================================
+note:
+======
+All the methods of collection interface are inherited to its child interface and child classes.
+Since collection is an interface we can not create object of it.
+
+List :
+======
+->List is an interface in the Java Collection Framework  used to store ordered collections of elements.
+->It allows access to elements using index-based positioning.
+->It is a child interface of the Collection interface.
+-> Declared in the java.util package.
+->Introduced in Java 1.2 version.
+
+implementation classes of list:
+======
+->ArrayList
+->LinkedList
+->Vector
+->Stack
+
+
+characteristics of List:
+===============
+->List is an indexed collection — every element is associated with an index starting from 0.
+-> It automatically assigns indexes when elements are added.
+->List allows duplicate elements.
+-> List allows null values (multiple, depending on the implementation).
+-> List maintains insertion order.
+-> Since it is indexed collection we can access elements inside the list with the help of index.
+->We can perform operations based on index, like get(index), set(index, element), remove(index).
+
+
+
+
+methods of list interface:
+===========
+TO ADD ELEMENTS:
+===
+ 1] void add(int index, Object element)
+
+ 2]boolean addAll(int index, Collection c);
+
+to remove elements:
+=====
+3] object remove (int index)
+
+4]object set (int index, object element)
+
+
+To Iterate elements 
+=================
+5]object get (int index)
+
+6]int indexOf(Object element)
+
+7]ListIterator listIterator()
+
+8]ListIterator listIterator(int index)
+
+
+other methods:
+=====
+9]public int indexOf(Object element).
+
+10]public int lastIndexOf(Object element)
+
+
+11]public List subList(int startIndex, int endIndex)
+
+============================================================================================
+
+
+
+ArrayList:-
+->ArrayList is a resizable array implementation of the List interface, 
+present in java.util package.
+->It uses an array-based data structure to store elements dynamically.
+->Default initial capacity of an ArrayList is 10.
+->When the internal array is full, it grows automatically using the formula:
+->New Capacity = (Current Capacity * 3) / 2 + 1
+(i.e., roughly 1.5 times the current size + 1).
+->It maintains the insertion order of elements — i.e., sequential order.
+->ArrayList is not synchronized by default (not thread-safe).
+->It allows duplicate elements and also allows storing null values.
+
+The class provides three constructors:
+ArrayList() – creates an empty list with default capacity (10).
+ArrayList(int initialCapacity) – creates a list with specified initial capacity.
+ArrayList(Collection c) – creates a list containing elements from the specified collection.
+
+============================================================================================
+Cursors
+--------
+• This is the special characteristics given for collection concepts
+• Using cursors we can retrieve the objects in collection one by one
+• they are of 2 types -
+1.Iterator
+2.ListIterator
+   
+
+1.Iterator
+----------
+• Iterator is an interface which is used to traverse the list in forward
+direction.
+• Basically it provides the privilige to access the objects without
+using index.
+interface Iterator
+{
+ public boolean hasNext();
+ public object next();
+ public void remove();
+}
+
+Methods of Iterator Interface:-
+==
+1]public object next()
+   This method moves the cursor into next element in
+   the collection and returns reference of that element.
+   If the collection doesn't have next element, it throws
+   NoSuchElementException.
+  
+ 2]public boolean hasNext()
+   This method returns true if collection has next
+   element otherwise it returns false.
+
+ 3]public Object remove()
+   The method removes the element from the
+   collection where cursor is pointed.
+
+
+2.ListIterator
+--------------
+• ListIterator is an interface which provides the facility to traverse
+the list in forward as well as backward direction.
+interface ListIterator
+{
+ public boolean hasNext();
+ public object next();
+ public void remove();
+ public boolean hasPrevious();
+ public object previous();
+ public void add(Object o);
+}
+
+hasPrevious():
+====
+• Returns true, if object is available in the previous index.
+
+previous():
+=====
+•  move the cursor to next object in
+previous direction and return that object
+
+
+note:
+==
+1]->If we modify a collection during iteration using any method other than the Iterator or ListIterator's own methods (like remove() or add()), we may get a ConcurrentModificationException.
+
+2]->we may get NoSuchElementException in he following cases
+	->if we are calling next() method when the cursor is pointing to last index.
+	->if we are calling previous()method when the cursor is pointing to first index.
+
+============================================================================================
+
+Generics              
+---------
+Since Collections are not type safe i.e programmer can add any types of
+objects there is no restriction for that so, to overcome this drawback JAVA
+has given Generics concept where you can create an object of specific type,
+if we add any other type of object than specified we will get CTE.
+
+
+1. ArrayList<Integer> a1=new ArrayList<>();
+a1.add("java");//CTE
+a1.add(100);
+a1.add('A');//CTE
+
+2. ArrayList<String> a1=new ArrayList<>();
+a1.add("java");
+a1.add(100);//CTE
+a1.add('A');//CTE
+
+3. ArrayList<Character> a1=new ArrayList<>();
+a1.add("java");//CTE
+a1.add(100);//CTE
+a1.add('A'); 
+
+
+->we can also avoid downcasting everytime when we fetch element from the collection
+   
+ex:
+public static void main(String[] args) 
+{
+		//without generics
+		ArrayList al=new ArrayList();//collection type object
+		al.add(new Employee());
+		al.add(new Employee());
+		al.add("hello");//allows other type of objects also
+		//we have to perform downcasting
+		Employee e=(Employee)al.get(0);//return type will be Object
+		
+		//with generics
+		ArrayList<Employee> al2=new ArrayList();//collection type object
+		al2.add(new Employee());
+//		al2.add("hello");//CTE
+		Employee e2=al2.get(0);//return type will be Employee
+		//need not downcast
+}
+
+
+ 

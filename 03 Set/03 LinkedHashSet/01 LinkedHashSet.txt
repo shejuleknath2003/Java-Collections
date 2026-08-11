@@ -1,0 +1,141 @@
+LinkedHashSet:
+=============
+LinkedHashSet is a subclass of HashSet, which maintains insertion order  and all the remaining characteristics are same.
+
+Internal implementation:
+HashMap → Stores elements based on hash codes.(In the key elements are stored and in the value dummy object is stored(PRESENT))
+Doubly Linked List → Maintains the insertion order
+
+Note:Performance (O(1) for add, remove, search)
+
+In the Node there are following properties,
+adjacent - handles the collision and stores the next bucket address
+previous and next pointers will maintain the insertion order.
+
+Constructors of LinkedHashSet:
+==================
+LinkedHashSet()
+LinkedHashSet(Collection)
+LinkedHashSet(initial capcity)
+LinkedHashSet(int initial capacity, float loadfactor)
+
+Extra Methods:
+addFirst()
+addLast()
+getFirst()
+getLast()
+removeFirst()
+removeLast()
+
+Note: We cannot sort the HashSet and LinkedHashSet directly but by converting into List we can do that.
+
+ex:
+package Collection.HashSet;
+
+import java.util.LinkedHashSet;
+
+public class DemoLinkedHashSet 
+{
+	//maintains order of insertion
+	public static void main(String[] args)
+	{
+		LinkedHashSet<Integer> li=new LinkedHashSet<>();
+		li.add(30);
+		li.add(22);
+		li.add(26);
+		li.add(32);
+		li.add(46);//collision
+		li.add(30);//duplicates willl not be added
+		li.add(null);//will be stored in 0 index
+		System.out.println(li);
+	}
+
+}
+o/p
+======
+[30, 22, 26, 32, 46, null]
+
+ex for adding custom objects:
+===================
+package Collection.HashSet.Custom;
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.TreeSet;
+
+public class Student
+{
+	int id;
+	String name;			
+	int age;
+	public Student(int id, String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + "]";
+	}
+	
+	
+	public boolean equals(Object o)
+	{
+		Student s=(Student)o;
+		return this.hashCode()==s.hashCode();
+	}
+	
+	
+	public int hashCode()
+	{
+		return Objects.hash(id,name,age);
+	}
+	public static void display(LinkedHashSet<Student> hs)
+	{
+		System.out.println("============");
+		for(Student s:hs)
+		{
+			System.out.println(s);
+		}
+		System.out.println("============");
+		
+	}
+}
+
+
+package Collection.HashSet.Custom;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+public class AddingStudentLinkedHash 
+{
+	public static void main(String[] args)
+	{
+		LinkedHashSet<Student> hs=new LinkedHashSet();
+		Student s1=new Student(101, "kiran", 20);//head
+		Student s2=new Student(125, "betsee", 22);
+		Student s3=new Student(115, "motu", 26);
+		Student s4=new Student(101, "shinchan", 16);
+		Student s5=new Student(120, "kalya", 22);//tail
+		hs.add(s1);
+		hs.add(s2);
+		hs.add(s3);
+		hs.add(s4);
+		hs.add(s5);
+		Student.display(hs);
+	}
+}
+
+o/p:
+=======
+============
+Student [id=101, name=kiran, age=20]
+Student [id=125, name=betsee, age=22]
+Student [id=115, name=motu, age=26]
+Student [id=101, name=shinchan, age=16]
+Student [id=120, name=kalya, age=22]
+============
+
+
+

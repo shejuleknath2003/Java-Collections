@@ -1,0 +1,11 @@
+
+Deque:
+------
+--> java.util package
+--> Deque stands for Double Ended Queue.
+--> Insertion and Deletion will takes place at both ends.
+When to use:
+------------
+::You want to add or remove elements from both ends.
+::Suitable for both Stack and Queue operations.
+

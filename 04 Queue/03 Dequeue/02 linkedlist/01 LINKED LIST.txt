@@ -1,0 +1,12 @@
+
+LinkedList implements Queue:
+----------------------------
+the LinkedList class implements the Deque interface, which means it supports operations from both ends — head and tail — making it usable as both a queue and a stack.
+
+we need to use only stack related methods if we want stack datastructure.
+o
+we need to use only queue related methods if we want queue datastructure.
+
+Note:
+ insertion and deletion from both ends efficient: O(1) time.
+

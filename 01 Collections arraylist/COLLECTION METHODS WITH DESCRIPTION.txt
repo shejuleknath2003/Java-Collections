@@ -1,0 +1,85 @@
+COLLECTION INTERFACE METHODS:
+================================
+
+1]public boolean add(Object element)
+   -> This method is used to add the elements into the collection.
+   -> It returns true if the element is added successfully. Otherwise, it returns false.
+
+ 2]public boolean remove(Object element)
+   -> This method is used to remove the elements from the collection.
+   -> If the given element is found in the collections, removes it and returns true.
+   -> If the given element is not found in the collections, the method waits to remove the element and returns false.
+
+3]public boolean contains(Object element)
+   -> The method is used to check whether the given element is present or not in the collection. 
+->If the collection contains the given element it returns true otherwise it returns false.
+
+4]public int size()
+   -> The method returns the total number of elements present in the collection.
+
+5] public boolean isEmpty()
+   -> This method is used to find whether the collection is empty or not. The method returns true if the collection is empty otherwise it returns false.
+
+6]public void clear()
+   -> This method removes all the elements from the collection and the collection becomes empty.
+
+7] public Object[] toArray()
+   -> The method is used to convert the elements of the collection into Array format. This method returns Object Array type containing elements of the collection, the size of the collection becomes size of the Array.
+
+ 8] public Iterator iterator()
+// Bulk Operation Methods
+ 9] public boolean addAll(Collection c)
+ 10] public boolean containsAll(Collection c)
+ 11] public boolean removeAll(Collection c)
+ 12] public boolean retainAll(Collection c)
+
+======================================================================
+
+LIST INTERFACE METHODS:
+==================
+Methods of List Interface:
+===========
+ 1] public void add(int index, Object element)
+   The method is used to insert the element at given index. If the index is not found it throws exception.
+ This method shifts the elements to right of the list when it is adding the given element.
+
+2]public object get (int index)
+   ->The Method is used to retrieve or access
+   the element at given index. 
+   ->It returns reference to the element. 
+   ->If the specified index is not
+   found it throws exception.
+
+
+3] public object remove (int index)
+   This method is used to remove the element present
+   at given index. It returns reference of removed
+   element. If index is not found, the method throws
+   exception. After this operation the elements of the
+   List will be shifted to Left.
+
+ 4]public object set (int index, object element)
+->The method is used to replace the existing element
+   at the given index by the given element.
+-> It returns the reference of the removed object.
+
+5]public int indexOf(Object element).
+   The method returns the index of the first occurence
+   of the given element in the List. If the element is
+   not found, it returns -1.
+
+
+6]public int lastIndexOf(Object element)
+   The method returns the index of the last occurence
+   of the given element in the List. If the element is
+   not found, it returns -1.
+
+
+ 7] public List subList(int startIndex, int endIndex)
+   The method returns the partial List from the
+   specified startIndex upto the specified endIndex.
+   It excludes the element at the endIndex.
+
+ 8]public ListIterator listIterator()
+
+

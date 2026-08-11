@@ -1,0 +1,45 @@
+Application For ArrayList:
+---> Random access (searching (get operation) and iteration)O(1).
+-----------------------------------------------------------------------------------------------------------------------------------------
+LinkedList:
+======================
+It is an implementation class for List and Queue. Present in java.util
+LinkedList object internally use Nodes to store the data.
+
+Node:
+It is a block of memory where in Three things will be there.
+1. Data (the value stored in the node).
+2. A reference to the previous node.
+3. A reference to the next node.
+
+Extra Methods:
+addFirst()
+addLast()
+getFirst()
+getLast()
+removeFirst()
+removeLast()
+
+Constructors:
+
+LinkedList()
+LinkedList(Collection)
+
+Characteristics:
+1. The internal implementation of LinkedList is Doubly LinkedList (uses Nodes).
+ Note : Here two pointes will be there in the LinkedList Object to point first Element an the last element.
+        Initial capacity is Zero.
+2. Insertion order is maintained.
+3. Zero based indexing
+4. It will accept Duplicates.
+5. It will accept multiple null values.
+6. it can store both homogeneous and heterogeneous elements
+7. LinkedList objects are not thread safe.
+Note:
+ In LinkedList random access will take N iterations (O(n)). so it is slower for random access.
+Application: 
+-->When the frequent modification is required(Adding and removing)
+
+How LinkedList.get(index) Works Internally,
+If the index is in the first half (index < size/2), it starts from the head and moves forward.
+If the index is in the second half (index >= size/2), it starts from the tail and moves backward.
