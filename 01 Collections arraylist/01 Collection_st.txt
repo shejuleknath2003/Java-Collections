@@ -259,6 +259,41 @@ note:
 	->if we are calling next() method when the cursor is pointing to last index.
 	->if we are calling previous()method when the cursor is pointing to first index.
 
+import java.util.*; 
+public class Third {
+	public static void main(String[] args) {
+ 		ArrayList<String> a1=new ArrayList<>();
+ 		a1.add("Java");
+ 		a1.add("SQL");
+ 		a1.add("Selenium");
+ 		a1.add("Aptitude");
+ 		System.out.println("Objects from forward direction");
+ 		//using Listiterator interface
+ 		ListIterator i1=a1.listIterator();
+ 		while(i1.hasNext())
+ 		{
+ 			System.out.println(i1.next());
+ 		}
+ 		System.out.println("Object from backward direction");
+ 		while(i1.hasPrevious())
+ 		{
+ 			System.out.println(i1.previous());
+ 		}
+		}
+	}
+Output:
+Objects from forward direction
+Java
+SQL
+Selenium
+Aptitude
+
+Object from backward direction
+Aptitude
+Selenium
+SQL
+Java
+
 ============================================================================================
 
 Generics              
