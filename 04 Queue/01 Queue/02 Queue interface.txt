@@ -22,3 +22,57 @@ Methods in Queue:
 | `E poll()`     | Removes and returns head; returns `null` if empty   |
 | `E element()`  | Retrieves head; throws exception if queue is empty  |// No such element exception
 | `E peek()`     | Retrieves head; returns `null` if queue is empty    |
+
+
+public class Demo{
+​
+    public static void main(String[] args){
+        
+        // Create a PriorityQueue of Integers
+        Queue<Integer> pq = new PriorityQueue<>();
+        
+        // Adding elements to the PriorityQueue
+        pq.add(50);
+        pq.add(20);
+        pq.add(40);
+        pq.add(10);
+        pq.add(30);
+        
+        // Display the PriorityQueue elements
+        System.out.println("PriorityQueue elements: " + pq);
+    }
+}
+
+Output
+PriorityQueue elements: [10, 20, 40, 50, 30]
+
+import java.util.Queue;
+import java.util.PriorityQueue;
+
+public class Demo {
+    public static void main(String[] args) {
+
+        Queue<Integer> q = new PriorityQueue<>();
+
+        q.add(30);
+        q.add(10);
+        q.add(20);
+
+        System.out.println("Queue: " + q);
+
+        System.out.println("remove(): " + q.remove());
+        System.out.println("poll(): " + q.poll());
+
+        System.out.println("element(): " + q.element());
+        System.out.println("peek(): " + q.peek());
+
+        System.out.println("Final Queue: " + q);
+    }
+}
+
+Queue: [10, 30, 20]
+remove(): 10
+poll(): 20
+element(): 30
+peek(): 30
+Final Queue: [30]
